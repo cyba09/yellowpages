@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
  
 # read url from input
-original_url = "http://indiansweetmaster.com/"
+original_url = "https://www.facebook.com/IndianPunjabiBazaar/"
 unscraped = deque([original_url])
 scraped = set()
 emails = set()  
