@@ -18,7 +18,7 @@ Change the URL in main.py line 10 to whatever yellow pages url you want scrapped
 ```python
 
 # change here
-URL = 'https://www.yellowpages.ca/search/si/{i}/Indian+Restaurant/Mississauga+ON'
+URL = 'https://www.yellowpages.ca/search/si/1/Indian+Restaurant/Mississauga+ON'
 
 
 ```
