@@ -29,3 +29,5 @@ link = 'https://www.facebook.com/TheShishMahal/'
 
 with sync_playwright() as playwright:
     run(playwright,link)
+
+
