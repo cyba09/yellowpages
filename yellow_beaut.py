@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import urllib.parse
 all_data = []
 
-for i in range(1,19):
+for i in range(1,2):
     print(f'getting page {i}')
     url = f'https://www.yellowpages.ca/search/si/{i}/Indian+Restaurant/Mississauga+ON'
     html = requests.get(url).content
@@ -22,8 +22,8 @@ for i in range(1,19):
                 dlink = urllib.parse.unquote(link)
                 all_data.append(dlink)
 
-with open(r'links.txt', 'w') as fp:
+'''with open(r'links.txt', 'w') as fp:
     for item in all_data:
         # write each item on a new line
         fp.write("%s\n" % item)
-    print('Done')
+    print('Done')'''
