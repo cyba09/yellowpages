@@ -20,22 +20,28 @@ def emailExtractor(urlString):
 
     href_lst = []
     for i in mailtos:
+        
         try:
             href_lst.append(i['href'])
         except:
-            return []
-
+            continue
+        
+    mail = 'no mail'
+    phone = 'no phone'
     for href in href_lst:
-        if 'tel:' in href or 'mailto:' in href :
-            emailList.append(href)
-    return emailList
+        if 'mailto:' in href :
+            mail = href
+        if 'tel:' in href:
+            phone = href
+    return [mail,phone]
 
 def get_mail(url):
     url1 = url + 'contact'
     url2 = url + 'contact-us'
     lst = emailExtractor(url1)
-    if lst:
-        return lst
-    else:
+    if lst[0] == 'no mail' and lst[1] == 'no phone':
         return emailExtractor(url2)
+    else:
+        return lst
+        
 
