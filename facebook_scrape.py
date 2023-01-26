@@ -1,11 +1,17 @@
 from playwright.sync_api import Playwright, sync_playwright, expect
 from bs4 import BeautifulSoup
+import time
 
 #first test
 def run(playwright: Playwright, link1):
-    browser = playwright.chromium.launch(headless=True)
+    browser = playwright.chromium.launch(headless=False)
     context = browser.new_context()
     page = context.new_page()
+    page.goto('https://www.facebook.com')
+    page.locator('#email').fill('noahmiller394@yahoo.com')
+    page.locator('#pass').fill('345678iuhgvbnjk')
+    page.locator('button').click()
+    time.sleep(4)
     page.goto(link1)
     html = page.inner_html('.x10cihs4')
     soup = BeautifulSoup(html, 'html.parser')
@@ -29,7 +35,4 @@ def get_facebook(link):
     with sync_playwright() as playwright:
         return run(playwright,link)
 
-print(get_facebook('https://www.facebook.com/TheShishMahal/'))
-
-
-
+#print(get_facebook("https://www.facebook.com/pages/Brampton-Dragon/179174688800001"))
