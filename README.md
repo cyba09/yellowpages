@@ -14,11 +14,12 @@ Install playwright chromium webdriver
 playwright install
 ```
 ## Usage
-Change the URL in main.py line 10 to whatever yellow pages url you want scrapped
+Change query and location in lines 8 and 9 in main.py
 ```python
 
 # change here
-URL = 'https://www.yellowpages.ca/search/si/1/Indian+Restaurant/Mississauga+ON'
+What = 'Indian Restaurant'
+Where = 'Mississauga ON'
 
 
 ```
