@@ -1,10 +1,8 @@
-from bs4 import BeautifulSoup
 import requests
+from bs4 import BeautifulSoup
 
+extensions = ['contact', 'contact-us', 'contact.html', 'contact-us.html']
 
-
-
-# function that extracts all emails from a page you provided and stores them in a list
 def emailExtractor(urlString):
     #print(f'trying {urlString}')
     emailList = []
@@ -31,17 +29,16 @@ def emailExtractor(urlString):
     for href in href_lst:
         if 'mailto:' in href :
             mail = href
+            mail = mail.replace('mailto:','')
         if 'tel:' in href:
             phone = href
+            phone = phone.replace('tel:','')
     return [mail,phone]
 
 def get_mail(url):
-    url1 = url + 'contact'
-    url2 = url + 'contact-us'
-    lst = emailExtractor(url1)
-    if lst[0] == '' and lst[1] == '':
-        return emailExtractor(url2)
-    else:
-        return lst
+    for ext in extensions:
+            lst = emailExtractor(url + ext)
+            if lst[0] != '' or lst[1] != '':
+                break
+    return lst
 
-#print(get_mail('http://hakkakhazana.ca/'))
