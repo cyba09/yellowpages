@@ -12,6 +12,7 @@ def get_data(num, link):
     for card in cards:
         name = card.select_one('.listing__name > a').get_text()
         city = card.select_one('.listing__address--full > span:nth-child(2)').get_text()
+        addr = card.select_one('.listing__address--full').get_text().rstrip()
         try:
             y_phone = card.select_one('ul.mlr > li.mlr__item--phone > a').get('data-phone')
         except:
@@ -26,6 +27,7 @@ def get_data(num, link):
             link = ''
         lst.append({'Name' :name,
                     'City' :city,
+                    'Address' :addr,
                     'Phone' :y_phone,
                     'Website' :link})
     return lst
