@@ -36,6 +36,7 @@ if __name__ == "__main__":
                 ls = wordPressEmail.get_mail(web)
         main_data.append({'Name' : rest['Name'],
                     'City' : rest['City'],
+                    'Address' : rest['Address'],
                     'Telephone' : rest['Phone'],
                     'Website' : rest['Website'],
                     'Email' : ls[0],
