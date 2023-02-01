@@ -11,7 +11,7 @@ def run(playwright: Playwright, link1):
     page.locator("#email").fill('noahmiller394@yahoo.com')
     page.locator("#pass").fill('345678iuhgvbnjk')
     page.locator("button").click()
-    time.sleep(3)
+    time.sleep(5)
     page.goto(link1)
     html = page.inner_html('body') #
     soup = BeautifulSoup(html, 'html.parser')
