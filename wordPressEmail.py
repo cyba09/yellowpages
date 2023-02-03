@@ -7,7 +7,8 @@ def emailExtractor(urlString):
     #print(f'trying {urlString}')
     emailList = []
     try:
-        getH = requests.get(urlString)
+        headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"}
+        getH = requests.get(urlString, headers=headers)
         h = getH.content
     except:
         h = ''
@@ -23,7 +24,6 @@ def emailExtractor(urlString):
             href_lst.append(i['href'])
         except:
             continue
-        
     mail = ''
     phone = ''
     for href in href_lst:
@@ -41,4 +41,6 @@ def get_mail(url):
             if lst[0] != '' or lst[1] != '':
                 break
     return lst
+
+#print(get_mail('https://indiansweetmaster.com/'))
 
