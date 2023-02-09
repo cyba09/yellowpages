@@ -1,18 +1,29 @@
-from playwright.sync_api import Playwright, sync_playwright, expect
 from bs4 import BeautifulSoup
 import re
+import requests
 
 
-
-def run(playwright: Playwright, url) -> None:
+def run(url) :
     emails = 'none'
     contact = ''
-    browser = playwright.chromium.launch(headless=True)
-    context = browser.new_context()
-    page = context.new_page()
-    page.goto(url)
-    html1 = page.inner_html('body')
-    soup = BeautifulSoup(html1, 'html.parser')
+    try:
+        headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"}
+        res = requests.get(url, headers=headers).text
+    except:
+        return emails
+    nw_emails = set(re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.com", res, re.I))
+    ml = list(nw_emails)
+    if ml:
+          emails = ml[0]
+          emails = emails.replace('mailto:','')
+          return emails
+    nw_emails = set(re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.ca", res, re.I))
+    ml = list(nw_emails)
+    if ml:
+          emails = ml[0]
+          emails = emails.replace('mailto:','')
+          return emails
+    soup = BeautifulSoup(res, 'html.parser')
     for link in soup.find_all('a'):
         try:
             ref = link.get('href')
@@ -39,23 +50,29 @@ def run(playwright: Playwright, url) -> None:
             new_url = url.replace('http://','')
           contact = new_url + contact
           contact = contact.replace('//', '/')
-    page.goto(url)
-    html = page.inner_html('body')
-    soup = BeautifulSoup(html1, 'html.parser')
-    new_emails = set(re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.com", html, re.I))
+    try:
+        headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"}
+        res = requests.get(url, headers=headers).text
+    except:
+        return emails
+    #soup = BeautifulSoup(res, 'html.parser')
+    new_emails = set(re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.com", res, re.I))
     eml = list(new_emails)
     if eml:
           emails = eml[0]
           emails = emails.replace('mailto:','')
-    
+          return emails
+    new_emails = set(re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.ca", res, re.I))
+    eml = list(new_emails)
+    if eml:
+          emails = eml[0]
+          emails = emails.replace('mailto:','')
+          return emails
     # ---------------------
-    context.close()
-    browser.close()
     return emails
 
 def get_socials(link):
-        with sync_playwright() as playwright:
-                return run(playwright,link)
+    return run(link)
 
-print(get_socials('http://www.indiancuisinebythelake.com/'))
+#print(get_socials(' https://bombayonthelake.ca/'))
 
