@@ -4,6 +4,7 @@ import pandas as pd
 import yellow
 import facebook_scrape
 import wordPressEmail
+import emaill
 
 What = 'Indian Restaurant'
 Where = 'Mississauga ON'
@@ -32,8 +33,12 @@ if __name__ == "__main__":
         else:
             if 'facebook' in web:
                 ls = facebook_scrape.get_facebook(web)
+                
             else:
                 ls = wordPressEmail.get_mail(web)
+                if ls[0] == '':
+                    ls[0] = emaill.get_socials(web)
+        
         main_data.append({'Name' : rest['Name'],
                     'City' : rest['City'],
                     'Address' : rest['Address'],
