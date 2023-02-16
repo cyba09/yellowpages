@@ -11,7 +11,7 @@ def run(playwright: Playwright, link1):
     page.locator("#email").fill('henry_struss@yahoo.com')
     page.locator("#pass").fill('23456789sdkmnd')
     page.locator("button").click()
-    #time.sleep(4)
+    time.sleep(4)
     page.goto(link1)
     page.wait_for_selector('.x14z4hjw > h1:nth-child(1)')
     html = page.inner_html('body') #
