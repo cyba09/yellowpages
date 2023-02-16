@@ -8,12 +8,12 @@ def run(playwright: Playwright, link1):
     context = browser.new_context()
     page = context.new_page()
     page.goto("https://www.facebook.com/")
-    page.locator("#email").fill('noahmiller394@yahoo.com')
-    page.locator("#pass").fill('345678iuhgvbnjk')
+    page.locator("#email").fill('henry_struss@yahoo.com')
+    page.locator("#pass").fill('23456789sdkmnd')
     page.locator("button").click()
-    time.sleep(4)
+    #time.sleep(4)
     page.goto(link1)
-    page.wait_for_url(link1)
+    page.wait_for_selector('.x14z4hjw > h1:nth-child(1)')
     html = page.inner_html('body') #
     soup = BeautifulSoup(html, 'html.parser')
     try:
